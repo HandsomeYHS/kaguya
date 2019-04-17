@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2009-2016 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.akanemurakawa.kaguya.dao.mapper.TagMapper">
+  <resultMap id="BaseResultMap" type="com.hanaeyuuma.freeblogs.model.Tag">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="tag_name" jdbcType="VARCHAR" property="tagName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, article_id, user_id, tag_name
+  </sql>
+  
+  <!-- author: HanaeYuuma -->
+  <!-- 1.不重复的查询单一用户所有标签 -->
+  <select id="selectTagDistinct" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select distinct tag_name from freeblogs_tag
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- author: HanaeYuuma -->
+  <!-- 插入标签，这里是通过用户id和文章id插入 -->
+    <insert id="insertSelective" parameterType="com.hanaeyuuma.freeblogs.model.Tag">
+    insert into freeblogs_tag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id, article_id,user_id,
+      <if test="tagName != null">
+        tag_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=INTEGER},#{articleId,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},
+      <if test="tagName != null">
+        #{tagName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- author: HanaeYuuma -->
+  <!-- 批处理删除标签，注意这里是通过Article的id不需要用户id -->
+  <delete id="batchDeleteByArticlePrimaryKey" parameterType="java.util.List">
+    delete from freeblogs_tag
+    where article_id in
+    <foreach collection="list" item="item" open="(" separator="," close=")">
+    	#{item}
+    </foreach>
+  </delete>
+  
+  <!-- author: HanaeYuuma -->
+  <!-- 删除标签 -->
+  <delete id="deleteByArticlePrimaryKey" parameterType="java.lang.Integer">
+    delete from freeblogs_tag
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- author: HanaeYuuma -->
+  <select id="selectByArticlePrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from freeblogs_tag
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+  
+  <!-- author: HanaeYuuma --> 
+  <!-- 修改标签名称 --> 
+  <update id="updateName" parameterType="com.hanaeyuuma.freeblogs.model.Tag">
+    update freeblogs_tag
+    set tag_name = #{tagName,jdbcType=VARCHAR}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 以下待使用 -->
+  <insert id="insert" parameterType="com.hanaeyuuma.freeblogs.model.Tag">
+    insert into freeblogs_tag (id, article_id, tag_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from freeblogs_tag
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanaeyuuma.freeblogs.model.Tag">
+    update freeblogs_tag
+    <set>
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="tagName != null">
+        tag_name = #{tagName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanaeyuuma.freeblogs.model.Tag">
+    update freeblogs_tag
+    set article_id = #{articleId,jdbcType=INTEGER},
+      tag_name = #{tagName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
