@@ -4,7 +4,9 @@ import java.util.List;
 import com.akanemurakawa.kaguya.dao.base.BaseMapper;
 import com.akanemurakawa.kaguya.model.entity.Admin;
 import com.akanemurakawa.kaguya.model.entity.Follower;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface FollowerMapper extends BaseMapper<Admin> {
 
 	List<Integer> selectFollowing(Integer uid);

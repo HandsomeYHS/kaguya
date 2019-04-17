@@ -1,5 +1,13 @@
 package com.akanemurakawa.kaguya.controller;
 
+import com.akanemurakawa.kaguya.model.entity.Notice;
+import com.akanemurakawa.kaguya.model.entity.data.Msg;
+import com.akanemurakawa.kaguya.service.AdminService;
+import com.akanemurakawa.kaguya.service.NoticeService;
+import com.akanemurakawa.kaguya.service.UserService;
+import com.akanemurakawa.kaguya.util.DateFormatUtils;
+import com.akanemurakawa.kaguya.util.HTMLToTextUtils;
+import com.akanemurakawa.kaguya.util.MarkdownUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.http.client.utils.DateUtils;
@@ -7,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,11 +24,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.*;
 
-/**
- * 
- * @author HanaeYuuma
- * @date 2018-8-29
- */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -37,8 +39,6 @@ public class AdminController {
 
 	/**
 	 * 跳转到公告管理
-	 * 
-	 * @return
 	 */
 	@RequestMapping("/toNoticeManager.do")
 	public String toNoticeManager() {
@@ -47,8 +47,6 @@ public class AdminController {
 
 	/**
 	 * 跳转到用户管理
-	 * 
-	 * @return
 	 */
 	@RequestMapping("/toUserManager.do")
 	public String toUserManager() {
@@ -57,8 +55,6 @@ public class AdminController {
 
 	/**
 	 * 跳转到数据系统
-	 * 
-	 * @return
 	 */
 	@RequestMapping("/toDataSystem.do")
 	public String toUserMatoDataSystem() {
@@ -67,8 +63,6 @@ public class AdminController {
 
 	/**
 	 * 跳转到系统设置
-	 * 
-	 * @return
 	 */
 	@RequestMapping("/toSetting.do")
 	public String toSetting() {
@@ -77,8 +71,6 @@ public class AdminController {
 
 	/**
 	 * 跳转到系统设置
-	 * 
-	 * @return
 	 */
 	@RequestMapping("/toWriteNotice.do")
 	public String toWriteNotice() {
@@ -410,7 +402,7 @@ public class AdminController {
 	 * @param str_ids
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteUsers/{str_ids}", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "/deleteUsers/{str_ids}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public Msg batchDeleteUsers(@PathVariable("str_ids") String str_ids) {
 		// 解析id，传过来的数据/user/deleteUsers/id1,id2,id3...

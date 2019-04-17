@@ -43,6 +43,15 @@ public class Notice	implements Serializable {
      */
     private String content;
 
+    public Notice(Integer adminId, String title,  String sumary, String content) {
+        super();
+        this.adminId = adminId;
+        this.title = title;
+        this.createTime = createTime;
+        this.sumary = sumary;
+        this.content = content;
+    }
+
     public Notice(Integer adminId, String title, Date createTime, String sumary, String content) {
         super();
         this.adminId = adminId;
