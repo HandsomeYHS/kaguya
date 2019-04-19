@@ -2,9 +2,6 @@ package com.akanemurakawa.kaguya.dao.base;
 
 import java.util.List;
 
-/**
- * 数据访问基础Dao
- */
 public interface BaseDao<T> {
 
     List<T> list(T record);
