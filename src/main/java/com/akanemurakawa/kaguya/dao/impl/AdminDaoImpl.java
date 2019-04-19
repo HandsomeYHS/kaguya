@@ -6,14 +6,18 @@ import com.akanemurakawa.kaguya.dao.base.BaseMapper;
 import com.akanemurakawa.kaguya.dao.mapper.AdminMapper;
 import com.akanemurakawa.kaguya.model.entity.Admin;
 import org.springframework.stereotype.Repository;
-
 import javax.annotation.Resource;
 
 @Repository
 public class AdminDaoImpl extends BaseDaoImpl<Admin> implements AdminDao{
 
     @Resource
-    private AdminMapper<Admin> adminMapper;
+    private AdminMapper adminMapper;
+
+    @Override
+    protected BaseMapper<Admin> getBaseMapper() {
+        return adminMapper;
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -36,12 +40,8 @@ public class AdminDaoImpl extends BaseDaoImpl<Admin> implements AdminDao{
     }
 
     @Override
-    public Admin selectByIdAndPassword(Admin admin) {
-        return getBaseMapper().s;
+    public Admin selectByAcountAndPassword(Admin admin) {
+        return getBaseMapper().selectByAcountAndPassword(admin);
     }
 
-    @Override
-    protected BaseMapper<Admin> getBaseMapper() {
-        return adminMapper;
-    }
 }

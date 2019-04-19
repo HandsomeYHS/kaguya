@@ -1,6 +1,5 @@
 package com.akanemurakawa.kaguya.dao;
 
-
 import com.akanemurakawa.kaguya.dao.base.BaseDao;
 import com.akanemurakawa.kaguya.model.entity.Admin;
 
@@ -18,5 +17,5 @@ public interface AdminDao extends BaseDao<Admin> {
 
     int updateByPrimaryKey(Admin record);
 
-    Admin selectByIdAndPassword(Admin admin);
+    Admin selectByAcountAndPassword(Admin admin);
 }
