@@ -1,6 +1,0 @@
-${AnsiColor.BLUE}
-+-++-++-++-++-++-++-++-+ +-++-++-++-++-++-+ +-++-++-+
-|d||i||s||p||a||t||c||h| |w||o||r||k||e||r| |d||e||v|
-+-++-++-++-++-++-++-++-+ +-++-++-++-++-++-+ +-++-++-+
- :: Spring Boot ::      (${spring-boot.formatted-version})
-${AnsiStyle.NORMAL}${AnsiColor.GREEN}
