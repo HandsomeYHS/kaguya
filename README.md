@@ -1,20 +1,19 @@
 # kaguya
+[![](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-### What's Kaguya?
 The name of kaguya comes from anime "かぐや様は告らせたい～天才たちの恋愛頭脳戦～", it means かぐや(輝夜) in Japanese.
 
-### Feature
-- [ ] TODO one
-- [ ] TODO two
-- [ ] TODO three
-- [ ] TODO four
-- [ ] TODO five
-- [ ] TODO six
-- [ ] TODO seven
+In fact, when I create this new project, I didn't think what to do. Maybe another Web System. This project may be 
+my last time to write web system. there is a long story, I know a little front end but have no long experience in 
+writing front end. All the UI of my system need me to design, I often spend my long time to toss one point or a 
+place, I want to design a beautiful UI on my web system, but in the other hand I don't want to waste too much time 
+in design. It's a disgusting thing to me for writing front end, I'm fun to design code or build a framework.
 
-### 唠叨
-一个想重新调整以前烂代码架构的项目。但是考虑到技术相差太多，变动太大，还是重新写一个其他的项目，
-而且以前写的前端看着就想吐，老实说我并不喜欢写前端，所以如果改以前的项目肯定会涉及改前端，不想
-再恶心自己了，目前也不知道写什么好。开始搬砖后就很少时间去做自己喜欢的项目，所以这里就当作是个
-人的小屋吧，不确保更新时间，写来只是为了好玩、开心。
-
+Kaguya maybe is a simple daily web system, there is no administrator, there is no registration.It more like a personal
+home, one note. you can record your daily life with pictures or words.There is your remmember, there is your life,
+there is your thinking, here is yours.It will be builded by Springboot and spring cloud, and use consul to resolve 
+service discovery, use jekins for automation, use Fegin to resolve HTTP client binder, use Shiro and Cas to implement 
+Single Sign-On, use RabbitMQ to implement Message Queue. 
+ 
+## License
+[BSD 3-Clause](./LICENSE)
