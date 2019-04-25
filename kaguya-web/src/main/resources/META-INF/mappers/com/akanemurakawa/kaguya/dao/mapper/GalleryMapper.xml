@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.akanemurakawa.kaguya.dao.mapper.GalleryMapper">
+  <resultMap id="BaseResultMap" type="com.akanemurakawa.kaguya.model.entity.Gallery">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="picture_url" jdbcType="VARCHAR" property="pictureUrl" />
+    <result column="authority_type" jdbcType="CHAR" property="authorityType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_code, title, create_time, picture_url, authority_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gallery
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gallery
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.akanemurakawa.kaguya.model.entity.Gallery" useGeneratedKeys="true">
+    insert into gallery (user_code, title, create_time, 
+      picture_url, authority_type)
+    values (#{userCode,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{pictureUrl,jdbcType=VARCHAR}, #{authorityType,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.akanemurakawa.kaguya.model.entity.Gallery" useGeneratedKeys="true">
+    insert into gallery
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="pictureUrl != null">
+        picture_url,
+      </if>
+      <if test="authorityType != null">
+        authority_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureUrl != null">
+        #{pictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityType != null">
+        #{authorityType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.akanemurakawa.kaguya.model.entity.Gallery">
+    update gallery
+    <set>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pictureUrl != null">
+        picture_url = #{pictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityType != null">
+        authority_type = #{authorityType,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.akanemurakawa.kaguya.model.entity.Gallery">
+    update gallery
+    set user_code = #{userCode,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      picture_url = #{pictureUrl,jdbcType=VARCHAR},
+      authority_type = #{authorityType,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
