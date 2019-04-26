@@ -23,8 +23,7 @@ public class I18nLocaleResolver implements LocaleResolver {
         if (!StringUtils.isEmpty(lan)){
             String[] split = lan.split("_");
             locale = new Locale(split[1], split[2]);
-            Session session = sessionContainer.getSession();
-            session.setAttribute(BaseConstant.I18N_LANGUAGE_SESSION, locale);
+            sessionContainer.settingLanguage(locale);
 
         }else{
             Session session = sessionContainer.getSession();
